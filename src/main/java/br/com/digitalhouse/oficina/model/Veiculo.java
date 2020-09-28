@@ -16,10 +16,8 @@ public class Veiculo {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
 	@Column(length = 7, nullable = false)
 	private String placa;
-	
 	@Column(length = 30, nullable = false)
 	private String cor;
 	@Column(length = 30, nullable = false)

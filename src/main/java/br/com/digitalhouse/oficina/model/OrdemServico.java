@@ -12,19 +12,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "clientes")
-public class Cliente {
-	
+@Table(name = "ordem_servico")
+public class OrdemServico {
+
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	@Column(length = 60, nullable = false)
-	private String nome;
+	@OneToMany
+	@JoinColumn(name="id_ordem_servico_cliente")
+	private Set<Cliente> clientes = new HashSet<Cliente>();
 	
 	@OneToMany
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name="id_ordem_servico_veiculo")
 	private Set<Veiculo> veiculos = new HashSet<Veiculo>();
+	
+	@Column(nullable = false)
+	private String descricao;
+	
+	@Column(nullable = false)
+	private String valor;
 
 	public Long getId() {
 		return id;
@@ -34,12 +41,12 @@ public class Cliente {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Set<Cliente> getClientes() {
+		return clientes;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setClientes(Set<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public Set<Veiculo> getVeiculos() {
@@ -50,12 +57,30 @@ public class Cliente {
 		this.veiculos = veiculos;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getValor() {
+		return valor;
+	}
+
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		result = prime * result + ((veiculos == null) ? 0 : veiculos.hashCode());
 		return result;
 	}
@@ -68,16 +93,26 @@ public class Cliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		OrdemServico other = (OrdemServico) obj;
+		if (clientes == null) {
+			if (other.clientes != null)
+				return false;
+		} else if (!clientes.equals(other.clientes))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (valor == null) {
+			if (other.valor != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!valor.equals(other.valor))
 			return false;
 		if (veiculos == null) {
 			if (other.veiculos != null)
@@ -86,6 +121,7 @@ public class Cliente {
 			return false;
 		return true;
 	}
+
 	
 	
 	
