@@ -29,9 +29,7 @@ public class ClienteService {
 	
 		Cliente antigo = this.findById(novo.getId());
 		
-		antigo.setNome(novo.getNome());
-		antigo.setVeiculos(novo.getVeiculos());
-		
+		antigo.setId(novo.getId());
 		return this.clienteRepository.save(antigo);
 		
 	}

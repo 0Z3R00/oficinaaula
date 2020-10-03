@@ -21,7 +21,7 @@ import br.com.digitalhouse.oficina.service.ClienteService;
 import br.com.digitalhouse.oficina.service.OrdemServicoService;
 
 @RestController
-@RequestMapping("/ordem_servico")
+@RequestMapping("/servicos")
 public class OrdemServicoResource {
 	
 	private final OrdemServicoService ordemServicoService;

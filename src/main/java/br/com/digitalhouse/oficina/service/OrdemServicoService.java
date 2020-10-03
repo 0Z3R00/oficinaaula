@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.digitalhouse.oficina.model.Cliente;
 import br.com.digitalhouse.oficina.model.OrdemServico;
-import br.com.digitalhouse.oficina.repository.ClienteRepository;
 import br.com.digitalhouse.oficina.repository.OrdemServicoRepository;
 
 
@@ -30,8 +28,7 @@ public class OrdemServicoService {
 	
 		OrdemServico antigo = this.findById(novo.getId());
 		
-		antigo.setCliente(novo.getCliente());
-		antigo.setVeiculo(novo.getVeiculo());
+		antigo.setId(novo.getId());
 		antigo.setDescricao(novo.getDescricao());
 		antigo.setValor(novo.getValor());
 		
